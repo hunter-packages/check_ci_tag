@@ -15,6 +15,17 @@ function(check_ci_tag)
 
   set(CHECK_CI_TAG_DONE TRUE PARENT_SCOPE)
 
+  if(HUNTER_ENABLED)
+    # Hunter support: Skip checks if project build as a third party
+    if(NOT "${HUNTER_PARENT_PACKAGE}" STREQUAL "")
+      message(
+          "Hunter detected. Parent project: ${HUNTER_PARENT_PACKAGE}."
+          " Skipping tag check."
+      )
+      return()
+    endif()
+  endif()
+
   if(NOT "$ENV{TRAVIS_TAG}" STREQUAL "")
     # Tag from Travis CI environment:
     # * https://docs.travis-ci.com/user/environment-variables/#Default-Environment-Variables
