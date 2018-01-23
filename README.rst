@@ -16,7 +16,7 @@ Usage
 
   project(foo VERSION 1.2.3)
 
-  hunterhunter_add_package(check_ci_tag)
+  hunter_add_package(check_ci_tag)
   find_package(check_ci_tag CONFIG REQUIRED)
 
   check_ci_tag()
